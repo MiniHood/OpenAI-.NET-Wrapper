@@ -23,14 +23,20 @@ namespace OpenAIWrapper
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
         }
 
-        public async Task<string> GenerateText(string prompt, int maxTokens = 100, float temperature = 1.0f)
+        public async Task<string> GenerateText(string prompt, int maxTokens = 100, float temperature = 1.0f, int n = 1, string stop = "", bool stream = false, float presencePenalty = 0.0f, int bestOf = 1, bool echo = false)
         {
             var request = new GenerateTextRequest
             {
                 Engine = _engine,
                 Prompt = prompt,
                 MaxTokens = maxTokens,
-                Temperature = temperature
+                Temperature = temperature,
+                N = n,
+                Stop = stop,
+                Stream = stream,
+                PresencePenalty = presencePenalty,
+                BestOf = bestOf,
+                Echo = echo
             };
 
             var response = await PostJsonAsync("engines/engine/generate", request);
@@ -55,6 +61,12 @@ namespace OpenAIWrapper
         public string Prompt { get; set; }
         public int MaxTokens { get; set; }
         public float Temperature { get; set; }
+        public int N { get; set; }
+        public string Stop { get; set; }
+        public bool Stream { get; set; }
+        public float PresencePenalty { get; set; }
+        public int BestOf { get; set; }
+        public bool Echo { get; set; }
     }
 
     class GenerateTextResponse
