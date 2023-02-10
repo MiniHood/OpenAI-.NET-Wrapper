@@ -1,4 +1,26 @@
-## Example
+## Simple Example
+```
+using System;
+
+namespace OpenAIExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string apiKey = "your_api_key_here";
+            string engine = "text-davinci-002";
+
+            var openAI = new OpenAIWrapper.OpenAI(apiKey, engine);
+            var result = openAI.GenerateText("Do you like pizza?").Result;
+
+            Console.WriteLine(result);
+        }
+    }
+}
+```
+
+## Advanced Example
 ```
 using System;
 
